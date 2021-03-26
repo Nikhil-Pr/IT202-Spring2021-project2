@@ -80,3 +80,35 @@ function Benefit(posY) {
         }
     }
 }
+
+function clear() {
+    context.clearRect(0, 0, canvas.width, canvas.height)
+}
+
+function instructions() {
+    clear()
+    context.font = "42px Arial"
+    context.fillText("Game Details", 400, 100)
+    context.font = "24px Arial"
+    context.fillText("Use the arrow keys to control your car", 325, 150)
+    context.fillText("=> Avoid large rocks", 325, 200)
+    context.fillText("=> Collect wrenches to score points", 325, 250)
+    context.fillText("=> You have 3 spare cars", 325, 300)
+    context.fillText("=> More rocks will appear as you get more points", 325, 350)
+    context.fillStyle = "green"
+    context.font = "42px Arial"
+    context.fillText("Press Enter to Begin!", 325, 450)
+}
+
+function gameHUD() {
+    context.font = "24px Arial"
+    context.fillStyle = "Black"
+    context.fillText(`Score: ${gameDetails.score}`, 10, 20)
+    context.fillText(`Level: ${gameDetails.level}`, 10, 40)
+    context.fillText(`Lives: ${gameDetails.lives}`, 900, 20)
+}
+
+
+
+
+
