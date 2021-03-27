@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Simple Scrolling Game</title>
+    <link rel="manifest" href="manifest.webmanifest">
 </head>
 
 <style>
@@ -16,6 +17,12 @@
 </div>
 
 <script src="gameScript.js"></script>
-
+<script>
+    if('serviceWorker' in navigator){
+        window.addEventListener('load', function(){
+            navigator.serviceWorker.register('sw.js')
+        })
+    }
+</script>
 </body>
 </html>

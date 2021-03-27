@@ -1,5 +1,9 @@
 const assets = [
-    "./index.html"
+    "index.html",
+    "assets/sprites/bg.png",
+    "assets/sprites/playerCar.png",
+    "assets/sprites/wrench.png",
+    "assets/sprites/boulder.png"
 ]
 
 const cacheName = 'project2-cache'
