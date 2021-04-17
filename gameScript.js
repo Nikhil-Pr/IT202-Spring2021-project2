@@ -3,7 +3,7 @@ let context = canvas.getContext('2d')
 let frames = 0
 let upPress = false
 let downPress = false
-let startTilt = null
+
 //Game details object
 let gameDetails = {
     score: 0,
@@ -19,13 +19,16 @@ let gameDetails = {
 let playerObj = {
     playerSprite: null,
     posX: 0,
-    posY: window.innerHeight / 2,
+    posY: canvas.innerHeight / 2,
     width: 100,
     height: 100,
     initSprite: function () {
         this.playerSprite = new Image()
         this.playerSprite.src = 'assets/sprites/playerCar.png'
         this.playerSprite.onload = () => {
+        }
+        if(isMobile){
+            this.posY = window.innerHeight / 2
         }
     },
     draw: function () {
@@ -103,8 +106,8 @@ function keyUpHandler(e) {
     }
 
     //Key to bring up instructions
-    if (e.key === "i") {
-        if (!gameDetails.gameRunning) {
+    if(e.key === "i"){
+        if(!gameDetails.gameRunning){
             instructions()
         }
     }
@@ -128,27 +131,26 @@ function keyDownHandler(e) {
     }
 }
 
-function orientationHandler(e) {
-
-    if (!startTilt) {
-        startTilt = e.beta
-    }
-
-    if (startTilt - e.beta < -5) {
-        upPress = true
-        downPress = false
-    } else if (startTilt - e.beta > 5) {
-
+function orientationHandler(e){
+    if(e.beta < 35){
+        curTilt = e.beta
         upPress = false
         downPress = true
-    } else {
+    }
+    else if(e.beta > 65){
+        curTilt = e.beta
+        upPress = true
+        downPress = false
+    }
+    else{
+        curTilt = e.beta
         upPress = false
         downPress = false
     }
 }
 
-function mouseDownHandler(e) {
-    if (!gameDetails.gameRunning) {
+function mouseDownHandler(e){
+    if(!gameDetails.gameRunning){
         loadGame()
     }
 }
@@ -156,14 +158,14 @@ function mouseDownHandler(e) {
 //Attach listeners for key handlers, display instructions
 window.onload = function () {
     canvas.width = window.innerWidth
-    if ('DeviceOrientationEvent' in window && isMobile) {
+    if('DeviceOrientationEvent' in window && isMobile){
         window.addEventListener('deviceorientation', orientationHandler, false)
         canvas.height = window.innerHeight
     }
     instructions()
     document.addEventListener("keyup", keyUpHandler, false)
     document.addEventListener("keydown", keyDownHandler, false)
-    document.addEventListener("mousedown", mouseDownHandler, false)
+    document.addEventListener("mousedown",mouseDownHandler, false )
 }
 
 //Instruction display
