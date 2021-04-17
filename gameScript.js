@@ -3,7 +3,6 @@ let context = canvas.getContext('2d')
 let frames = 0
 let upPress = false
 let downPress = false
-let curTilt = 0
 
 //Game details object
 let gameDetails = {
@@ -44,7 +43,7 @@ let playerObj = {
 //Constructor for 'Harm' type objects
 function Harm(posY) {
     this.sprite = null
-    this.posX = canvas.width
+    this.posX = window.innerWidth
     this.posY = posY
     this.width = 60
     this.height = 60
@@ -68,7 +67,7 @@ function Harm(posY) {
 //Constructor for 'Benefit' type objects
 function Benefit(posY) {
     this.sprite = null
-    this.posX = canvas.width
+    this.posX = window.innerWidth
     this.posY = posY
     this.width = 60
     this.height = 60
@@ -130,7 +129,6 @@ function keyDownHandler(e) {
 }
 
 function orientationHandler(e){
-    console.log("tilt")
     if(e.beta < 35){
         curTilt = e.beta
         upPress = false
@@ -156,15 +154,15 @@ function mouseDownHandler(e){
 
 //Attach listeners for key handlers, display instructions
 window.onload = function () {
+    canvas.width = window.innerWidth
+    if('DeviceOrientationEvent' in window && isMobile){
+        window.addEventListener('deviceorientation', orientationHandler, false)
+        canvas.height = window.innerHeight
+    }
     instructions()
     document.addEventListener("keyup", keyUpHandler, false)
     document.addEventListener("keydown", keyDownHandler, false)
-    if('DeviceOrientationEvent' in window){
-        window.addEventListener('deviceorientation', orientationHandler, false)
-    }
-    else{
-        console.log("No tilt!")
-    }
+
     document.addEventListener("mousedown",mouseDownHandler, false )
 }
 

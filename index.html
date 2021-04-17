@@ -7,8 +7,7 @@
 </head>
 
 <style>
-    canvas{border: 2px solid black}
-    #gameDiv{background-image: url("assets/sprites/bg.png"); max-height: 1080px; max-width: 1080px}
+    #gameDiv{background-image: url("assets/sprites/bg.png");}
 </style>
 
 <body>
@@ -17,12 +16,21 @@
 </div>
 <script src="gameScript.js"></script>
 <script>
+    isMobile = false
     if('serviceWorker' in navigator){
         window.addEventListener('load', function(){
             navigator.serviceWorker.register('sw.js')
         })
     }
-
+    if(navigator.userAgent.match(/Android/i)
+        || navigator.userAgent.match(/webOS/i)
+        || navigator.userAgent.match(/iPhone/i)
+        || navigator.userAgent.match(/iPad/i)
+        || navigator.userAgent.match(/iPod/i)
+        || navigator.userAgent.match(/BlackBerry/i)
+        || navigator.userAgent.match(/Windows Phone/i)){
+            isMobile = true
+    }
 </script>
 </body>
 </html>
