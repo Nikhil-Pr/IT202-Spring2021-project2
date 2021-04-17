@@ -131,13 +131,13 @@ function keyDownHandler(e) {
 
 function orientationHandler(e){
     console.log("tilt")
-    if(curTilt - e.beta < -5){
+    if(curTilt - e.beta < 0){
 
         curTilt = e.beta
         upPress = true
         downPress = false
     }
-    else if(curTilt - e.beta > 5){
+    else if(curTilt - e.beta > 0){
         curTilt = e.beta
         upPress = false
         downPress = true
@@ -157,6 +157,9 @@ window.onload = function () {
     document.addEventListener("keydown", keyDownHandler, false)
     if('DeviceOrientationEvent' in window){
         window.addEventListener('deviceorientation', orientationHandler, false)
+    }
+    else{
+        console.log("No tilt!")
     }
     document.addEventListener("mousedown",mouseDownHandler, false )
 }
