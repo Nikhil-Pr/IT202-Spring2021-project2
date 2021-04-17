@@ -6,6 +6,7 @@
     "start_url": ".",
     "name": "IT202 Project 2",
     "short_name": "Project 2",
+    "orientation":"landscape",
     "icons": [
         {
             "src": "assets/icons/icon-192x192.png",

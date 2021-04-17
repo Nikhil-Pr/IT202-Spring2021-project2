@@ -3,6 +3,7 @@ let context = canvas.getContext('2d')
 let frames = 0
 let upPress = false
 let downPress = false
+let curTilt = 0
 
 //Game details object
 let gameDetails = {
@@ -128,11 +129,32 @@ function keyDownHandler(e) {
     }
 }
 
+function orientationHandler(e){
+    if(curTilt - e.beta < -5){
+        curTilt = e.beta
+        upPress = true
+        downPress = false
+    }
+    else if(curTilt - e.beta > 5){
+        curTilt = e.beta
+        upPress = false
+        downPress = true
+    }
+    else{
+        curTilt = e.beta
+        upPress = false
+        downPress = false
+    }
+}
+
 //Attach listeners for key handlers, display instructions
 window.onload = function () {
     instructions()
     document.addEventListener("keyup", keyUpHandler, false)
     document.addEventListener("keydown", keyDownHandler, false)
+    if('DeviceOrientationEvent' in window){
+        document.addEventListener('deviceorientation', orientationHandler, false)
+    }
 }
 
 //Instruction display
