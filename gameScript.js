@@ -131,13 +131,12 @@ function keyDownHandler(e) {
 
 function orientationHandler(e){
     console.log("tilt")
-    if(curTilt - e.beta < -3){
-
+    if(e.beta < 35){
         curTilt = e.beta
         upPress = false
         downPress = true
     }
-    else if(curTilt - e.beta > 2){
+    else if(e.beta > 65){
         curTilt = e.beta
         upPress = true
         downPress = false
