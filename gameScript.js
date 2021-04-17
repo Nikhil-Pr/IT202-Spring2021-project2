@@ -130,7 +130,9 @@ function keyDownHandler(e) {
 }
 
 function orientationHandler(e){
+    console.log("tilt")
     if(curTilt - e.beta < -5){
+
         curTilt = e.beta
         upPress = true
         downPress = false
@@ -140,10 +142,11 @@ function orientationHandler(e){
         upPress = false
         downPress = true
     }
-    else{
-        curTilt = e.beta
-        upPress = false
-        downPress = false
+}
+
+function mouseDownHandler(e){
+    if(!gameDetails.gameRunning){
+        loadGame()
     }
 }
 
@@ -153,8 +156,9 @@ window.onload = function () {
     document.addEventListener("keyup", keyUpHandler, false)
     document.addEventListener("keydown", keyDownHandler, false)
     if('DeviceOrientationEvent' in window){
-        document.addEventListener('deviceorientation', orientationHandler, false)
+        window.addEventListener('deviceorientation', orientationHandler, false)
     }
+    document.addEventListener("mousedown",mouseDownHandler, false )
 }
 
 //Instruction display
